@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body background="img/card01.jpg">
+    <div class="container">
+        <div class="left">
+            <img src="/img/pic03.jpg" alt="Profile Background">
+            <div class="overlay-text">
+                Update Your<br>Profile Info.
+            </div>
+        </div>
+        <div class="right">
+            <form th:object="${user}" th:action="@{/update}" method="post">
+                <h1>Edit Profile</h1>
+
+                <!-- Hidden ID and Password Fields -->
+                <input type="hidden" th:field="*{id}" />
+                <input type="hidden" th:field="*{password}" />
+
+                <!-- Name Field with Icon -->
+                <div class="input-container">
+                    <i class="fa fa-user icon"></i>
+                    <input type="text" th:field="*{name}" placeholder="Enter Name">
+                </div>
+
+                <!-- Email Field with Icon -->
+                <div class="input-container">
+                    <i class="fa fa-envelope icon"></i>
+                    <input type="email" th:field="*{email}" placeholder="Enter Email">
+                </div>
+
+                <button id="button" type="submit">Update Profile</button>
+            </form>
+        </div>
+    </div>
+    <script th:src="@{/javascript/user.js}"></script>
+</body>
+
+</html>

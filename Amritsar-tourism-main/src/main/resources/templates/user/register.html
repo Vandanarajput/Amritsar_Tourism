@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registerForm</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body background="img/card01.jpg">
+    <div class="container">
+        <div class="left">
+            <img src="/img/pic03.jpg" alt="">
+            <div class="overlay-text">
+                Connect to<br>Amritsar Sahib.
+            </div>
+        </div>
+        <div class="right">
+            <form th:object="${user}" th:action="@{/register}" method="post">
+                <h1>Create account</h1>
+
+                <!-- Name Field with Icon -->
+                <div class="input-container">
+                    <i class="fa fa-user icon"></i>
+                    <input type="text" th:field="*{name}" placeholder="Enter Name">
+                    <span class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                </div>
+                <!-- User ID Field with Icon -->
+                <div class="input-container">
+                    <i class="fa fa-id-card icon"></i>
+                    <input type="text" th:field="*{email}" placeholder="Enter email">
+                    <span class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                    <span class="error-message" th:if="${emailError != null}" th:text="${emailError}"></span>
+                </div>
+                <!-- Password Field -->
+                <div class="input-container">
+                    <i class="fa fa-lock icon"></i>
+                    <input type="password" th:field="*{password}" placeholder="Enter Password" class="password-field"
+                        oninput="toggleEyeIcon(this)">
+                    <i class="fa fa-eye icon eye-icon toggle-password" style="display: none;"></i>
+                    <span class="error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div class="input-container">
+                    <i class="fa fa-lock icon"></i>
+                    <input type="password" th:field="*{confirm_password}" placeholder="Re-enter Password"
+                        class="password-field" oninput="toggleEyeIcon(this)">
+                    <i class="fa fa-eye icon eye-icon toggle-password" style="display: none;"></i>
+                    <span class="error-message" th:if="${#fields.hasErrors('confirm_password')}"
+                        th:errors="*{confirm_password}"></span>
+                </div>
+
+                <button id="button" type="submit">Sign Up</button>
+
+                <p id="bottomText">Already have an account? <a th:href="@{/login}">Login</a></p>
+            </form>
+
+        </div>
+    </div>
+    <script th:src="@{/javascript/user.js}"></script>
+</body>
+
+</html>
